@@ -9,5 +9,6 @@ email_template.html
 results/
 slackreport.json
 testing*
+ro-crate-metadata.json
 testing/
 work/
