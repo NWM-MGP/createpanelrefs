@@ -26,6 +26,7 @@ include { BAM_CREATE_SOM_PON_GATK     } from '../subworkflows/nf-core/bam_create
 */
 
 include { CNVKIT_BATCH                } from '../modules/nf-core/cnvkit/batch'
+include { SAMTOOLS_VIEW               } from '../modules/nf-core/samtools/view'
 include { MULTIQC                     } from '../modules/nf-core/multiqc'
 
 // Initialize file channels based on params, defined in the params.genomes[params.genome] scope
@@ -85,10 +86,24 @@ workflow CREATEPANELREFS {
     if (params.tools && params.tools.split(',').contains('cnvkit')) {
 
         ch_samplesheet
-            .map{ meta, bam, bai, cram, crai -> [meta + [id:'panel'], bam]}
+            .branch { meta, bam, bai, cram, crai ->
+                bamfiles: bam
+                    return [meta, bam]
+                cramfiles: cram
+                    return [meta, cram, crai]
+            }
+            .set { ch_input_by_fmt }
+
+        SAMTOOLS_VIEW (ch_input_by_fmt.cramfiles, ch_fasta, [], "").bam
+            .mix(ch_input_by_fmt.bamfiles)
+            .map { meta, bam ->
+                return [meta + [id:'panel'], bam]
+            }
             .groupTuple()
-            .map {meta, bam -> [ meta, [], bam ]}
-            .set { ch_cnvkit_input }
+            .map { meta, bam ->
+                return [meta, [], bam]
+            }
+            .set {ch_cnvkit_input}
 
         CNVKIT_BATCH ( ch_cnvkit_input, ch_fasta, [[:],[]], ch_cnvkit_targets, [[:],[]], true )
         ch_versions = ch_versions.mix(CNVKIT_BATCH.out.versions)
