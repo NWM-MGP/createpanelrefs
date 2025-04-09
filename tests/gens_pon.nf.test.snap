@@ -1,5 +1,5 @@
 {
-    "Run gens test": {
+    "-profile test --tools gens --input tests/csv/1.0.0/bam_sorted.csv --gens_bin_length 100 --gens_pon_name gens_pon --gens_readcount_format TSV": {
         "content": [
             7,
             {
@@ -53,9 +53,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2024-11-12T10:09:54.111724435"
+        "timestamp": "2025-04-09T14:48:02.583474325"
     }
 }

@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "main.nf"
     tag "MUTECT2"
 
-    test("Run MUTECT2 test") {
+    test("-profile test --tools mutect2 --mutect2_pon_name test") {
 
         when {
             params {

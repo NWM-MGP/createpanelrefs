@@ -6,7 +6,7 @@ nextflow_pipeline {
     tag "pipeline_createpanelrefs"
     config "./germlinecnvcaller_cohort.config"
 
-    test("Run germlinecnvcaller test") {
+    test("-profile test --tools germlinecnvcaller --input tests/csv/1.0.0/bam_sorted.csv --gcnv_model_name cohort --gcnv_ploidy_priors --gcnv_scatter_content 2") {
 
         when {
             params {

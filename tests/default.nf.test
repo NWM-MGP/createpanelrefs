@@ -5,7 +5,7 @@ nextflow_pipeline {
     tag "pipeline"
     tag "pipeline_createpanelrefs"
 
-    test("Run with profile test | default aka cnvkit") {
+    test("-profile test --tools cnvkit") {
 
         when {
             params {
