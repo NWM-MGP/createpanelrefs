@@ -43,6 +43,8 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_crea
 */
 
 workflow {
+    main:
+
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
         params.version,
