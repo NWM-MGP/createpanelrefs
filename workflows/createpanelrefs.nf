@@ -26,6 +26,7 @@ include { BAM_CREATE_SOM_PON_GATK     } from '../subworkflows/nf-core/bam_create
 */
 
 include { CNVKIT_BATCH                } from '../modules/nf-core/cnvkit/batch'
+include { SAMTOOLS_VIEW               } from '../modules/nf-core/samtools/view'
 include { MULTIQC                     } from '../modules/nf-core/multiqc'
 
 // Initialize file channels based on params, defined in the params.genomes[params.genome] scope
@@ -78,23 +79,39 @@ workflow CREATEPANELREFS {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    tools
+
     main:
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    if (params.tools && params.tools.split(',').contains('cnvkit')) {
+    if (tools && tools.split(',').contains('cnvkit')) {
 
         ch_samplesheet
-            .map{ meta, bam, bai, cram, crai -> [meta + [id:'panel'], bam]}
+            .branch { meta, bam, bai, cram, crai ->
+                bamfiles: bam
+                    return [meta, bam]
+                cramfiles: cram
+                    return [meta, cram, crai]
+            }
+            .set { ch_input_by_fmt }
+
+        SAMTOOLS_VIEW (ch_input_by_fmt.cramfiles, ch_fasta, [], "").bam
+            .mix(ch_input_by_fmt.bamfiles)
+            .map { meta, bam ->
+                return [meta + [id:'panel'], bam]
+            }
             .groupTuple()
-            .map {meta, bam -> [ meta, [], bam ]}
-            .set { ch_cnvkit_input }
+            .map { meta, bam ->
+                return [meta, [], bam]
+            }
+            .set {ch_cnvkit_input}
 
         CNVKIT_BATCH ( ch_cnvkit_input, ch_fasta, [[:],[]], ch_cnvkit_targets, [[:],[]], true )
         ch_versions = ch_versions.mix(CNVKIT_BATCH.out.versions)
     }
 
-    if (params.tools && params.tools.split(',').contains('germlinecnvcaller')) {
+    if (tools && tools.split(',').contains('germlinecnvcaller')) {
 
         ch_samplesheet
             .map{meta, bam, bai, cram, crai ->
@@ -119,7 +136,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(GERMLINECNVCALLER_COHORT.out.versions)
     }
 
-    if (params.tools && params.tools.split(',').contains('mutect2')) {
+    if (tools && tools.split(',').contains('mutect2')) {
 
         ch_mutect2_input = ch_samplesheet.map{meta, bam, bai, cram, crai ->
             if (bam)    return [ meta + [data_type:'bam'], bam, bai, [] ]
@@ -137,7 +154,7 @@ workflow CREATEPANELREFS {
 
     }
 
-    if (params.tools && params.tools.split(',').contains('gens')) {
+    if (tools && tools.split(',').contains('gens')) {
 
         ch_samplesheet
             .map{meta, bam, bai, cram, crai ->
