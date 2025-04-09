@@ -56,8 +56,9 @@ workflow {
     )
 
     // WORKFLOW: Run main workflow
+    NFCORE_CREATEPANELREFS(
         PIPELINE_INITIALISATION.out.samplesheet,
-        params.tools
+        params.tools,
     )
 
     // SUBWORKFLOW: Run completion tasks
@@ -85,7 +86,6 @@ workflow NFCORE_CREATEPANELREFS {
     tools
 
     main:
-
     // WORKFLOW: Run pipeline
     CREATEPANELREFS(samplesheet, tools)
 
