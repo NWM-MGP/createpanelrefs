@@ -1,5 +1,5 @@
 {
-    "-profile test --tools cnvkit": {
+    "-profile test --tools cnvkit --input tests/csv/1.0.0/bam_cram.csv": {
         "content": [
             4,
             {
@@ -55,6 +55,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-09T16:04:00.7563668"
+        "timestamp": "2025-04-09T16:56:32.61350234"
     }
 }

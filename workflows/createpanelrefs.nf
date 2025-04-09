@@ -79,11 +79,13 @@ workflow CREATEPANELREFS {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    tools
+
     main:
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    if (params.tools && params.tools.split(',').contains('cnvkit')) {
+    if (tools && tools.split(',').contains('cnvkit')) {
 
         ch_samplesheet
             .branch { meta, bam, bai, cram, crai ->
@@ -109,7 +111,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(CNVKIT_BATCH.out.versions)
     }
 
-    if (params.tools && params.tools.split(',').contains('germlinecnvcaller')) {
+    if (tools && tools.split(',').contains('germlinecnvcaller')) {
 
         ch_samplesheet
             .map{meta, bam, bai, cram, crai ->
@@ -134,7 +136,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(GERMLINECNVCALLER_COHORT.out.versions)
     }
 
-    if (params.tools && params.tools.split(',').contains('mutect2')) {
+    if (tools && tools.split(',').contains('mutect2')) {
 
         ch_mutect2_input = ch_samplesheet.map{meta, bam, bai, cram, crai ->
             if (bam)    return [ meta + [data_type:'bam'], bam, bai, [] ]
@@ -152,7 +154,7 @@ workflow CREATEPANELREFS {
 
     }
 
-    if (params.tools && params.tools.split(',').contains('gens')) {
+    if (tools && tools.split(',').contains('gens')) {
 
         ch_samplesheet
             .map{meta, bam, bai, cram, crai ->
