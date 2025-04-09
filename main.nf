@@ -54,8 +54,8 @@ workflow {
     )
 
     // WORKFLOW: Run main workflow
-    NFCORE_CREATEPANELREFS(
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet,
+        params.tools
     )
 
     // SUBWORKFLOW: Run completion tasks
@@ -80,11 +80,12 @@ workflow {
 workflow NFCORE_CREATEPANELREFS {
     take:
     samplesheet // channel: samplesheet read in from --input
+    tools
 
     main:
 
     // WORKFLOW: Run pipeline
-    CREATEPANELREFS(samplesheet)
+    CREATEPANELREFS(samplesheet, tools)
 
     emit:
     multiqc_report = CREATEPANELREFS.out.multiqc_report // channel: /path/to/multiqc_report.html
