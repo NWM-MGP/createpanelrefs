@@ -25,7 +25,7 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 - [#31](https://github.com/nf-core/createpanelrefs/pull/31) - Publish interval_list file from gens subworkflow by default.
 - [#35](https://github.com/nf-core/createpanelrefs/pull/35) - Template update for nf-core/tools v3.0.2
 - [#35](https://github.com/nf-core/createpanelrefs/pull/35) - Improve pipeline level tests
-- [#48](https://github.com/nf-core/createpanelrefs/pull/48) - Improve CI (automatic nf-test shards)
+- [#48](https://github.com/nf-core/createpanelrefs/pull/48) - Improve CI (early failure + automatic nf-test shards + [RunsOn](https://runs-on.com/))
 
 ### `Fixed`
 
