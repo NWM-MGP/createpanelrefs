@@ -10,10 +10,11 @@ nextflow_pipeline {
 
         when {
             params {
+                igenomes_base              = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data'
                 modules_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/'
-                fasta                      = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta"
                 dict                       = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.dict"
                 fai                        = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta.fai"
+                fasta                      = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta"
                 gcnv_model_name            = 'cohort'
                 gcnv_scatter_content       = 2
                 input                      = "${projectDir}/tests/csv/1.0.0/bam_sorted.csv"

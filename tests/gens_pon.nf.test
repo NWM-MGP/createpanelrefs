@@ -10,8 +10,8 @@ nextflow_pipeline {
 
         when {
             params {
-                igenomes_ignore            = true
                 genome                     = null
+                igenomes_ignore            = true
                 modules_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/'
                 fasta                      = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta"
                 gens_bin_length            = 100

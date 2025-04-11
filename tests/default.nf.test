@@ -9,8 +9,9 @@ nextflow_pipeline {
 
         when {
             params {
-                outdir = "$outputDir"
-                input  = "${projectDir}/tests/csv/1.0.0/bam_cram.csv"
+                igenomes_base = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data'
+                input         = "${projectDir}/tests/csv/1.0.0/bam_cram.csv"
+                outdir        = "$outputDir"
             }
         }
 
