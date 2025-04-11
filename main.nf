@@ -15,18 +15,16 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//   This is an example of how to use getGenomeAttribute() to fetch parameters
-//   from igenomes.config using `--genome`
-params.fasta                       = getGenomeAttribute('fasta')
-params.fai                         = getGenomeAttribute('fai')
 params.dict                        = getGenomeAttribute('dict')
+params.fai                         = getGenomeAttribute('fai')
+params.fasta                       = getGenomeAttribute('fasta')
 params.gcnv_exclude_bed            = getGenomeAttribute('gcnv_exclude_bed')
 params.gcnv_exclude_interval_list  = getGenomeAttribute('gcnv_exclude_interval_list')
 params.gcnv_mappable_regions       = getGenomeAttribute('gcnv_mappable_regions')
+params.gcnv_ploidy_priors          = getGenomeAttribute('gcnv_ploidy_priors')
 params.gcnv_segmental_duplications = getGenomeAttribute('gcnv_segmental_duplications')
 params.gcnv_target_bed             = getGenomeAttribute('gcnv_target_bed')
 params.gcnv_target_interval_list   = getGenomeAttribute('gcnv_target_interval_list')
-params.gcnv_ploidy_priors          = getGenomeAttribute('gcnv_ploidy_priors')
 params.mutect2_target_bed          = getGenomeAttribute('mutect2_target_bed')
 
 /*
@@ -40,71 +38,59 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_crea
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOWS FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// WORKFLOW: Run main analysis pipeline depending on type of input
-//
-workflow NFCORE_CREATEPANELREFS {
-
-    take:
-    samplesheet // channel: samplesheet read in from --input
-    tools
-
-    main:
-
-    //
-    // WORKFLOW: Run pipeline
-    //
-    CREATEPANELREFS (
-        samplesheet,
-        tools
-    )
-    emit:
-    multiqc_report = CREATEPANELREFS.out.multiqc_report // channel: /path/to/multiqc_report.html
-}
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 workflow {
-
     main:
-    //
+
     // SUBWORKFLOW: Run initialisation tasks
-    //
-    PIPELINE_INITIALISATION (
+    PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input
+        params.input,
     )
 
-    //
     // WORKFLOW: Run main workflow
-    //
-    NFCORE_CREATEPANELREFS (
+    NFCORE_CREATEPANELREFS(
         PIPELINE_INITIALISATION.out.samplesheet,
-        params.tools
+        params.tools,
     )
-    //
+
     // SUBWORKFLOW: Run completion tasks
-    //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_CREATEPANELREFS.out.multiqc_report
+        NFCORE_CREATEPANELREFS.out.multiqc_report,
     )
+}
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NAMED WORKFLOWS FOR PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+// WORKFLOW: Run main analysis pipeline depending on type of input
+workflow NFCORE_CREATEPANELREFS {
+    take:
+    samplesheet // channel: samplesheet read in from --input
+    tools
+
+    main:
+    // WORKFLOW: Run pipeline
+    CREATEPANELREFS(samplesheet, tools)
+
+    emit:
+    multiqc_report = CREATEPANELREFS.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
 
 /*
@@ -113,21 +99,12 @@ workflow {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-//
 // Get attribute from genome config file e.g. fasta
-//
-
 def getGenomeAttribute(attribute) {
     if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
+        if (params.genomes[params.genome].containsKey(attribute)) {
+            return params.genomes[params.genome][attribute]
         }
     }
     return null
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/

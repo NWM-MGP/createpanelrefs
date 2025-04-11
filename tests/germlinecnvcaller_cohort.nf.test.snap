@@ -1,15 +1,12 @@
 {
     "-profile test --tools germlinecnvcaller --input tests/csv/1.0.0/bam_sorted.csv --gcnv_model_name cohort --gcnv_ploidy_priors --gcnv_scatter_content 2": {
         "content": [
-            12,
+            10,
             {
                 "GATK4_ANNOTATEINTERVALS": {
                     "gatk4": "4.5.0.0"
                 },
                 "GATK4_COLLECTREADCOUNTS": {
-                    "gatk4": "4.5.0.0"
-                },
-                "GATK4_CREATESEQUENCEDICTIONARY": {
                     "gatk4": "4.5.0.0"
                 },
                 "GATK4_DETERMINEGERMLINECONTIGPLOIDY": {
@@ -26,9 +23,6 @@
                 },
                 "GATK4_PREPROCESSINTERVALS": {
                     "gatk4": "4.5.0.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
                 },
                 "Workflow": {
                     "nf-core/createpanelrefs": "v1.0dev"
@@ -142,9 +136,6 @@
                 "germlinecnvcaller/readcounts",
                 "germlinecnvcaller/readcounts/sample1.hdf5",
                 "germlinecnvcaller/readcounts/sample2.hdf5",
-                "germlinecnvcaller/references",
-                "germlinecnvcaller/references/genome.dict",
-                "germlinecnvcaller/references/genome.fasta.fai",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -179,7 +170,6 @@
                 "denoising_config.json:md5,d2171570b7c746be4d2ce35d9b8db18c",
                 "gcnvkernel_version.json:md5,273ffad942b47cacbc56d29f77ccf2a6",
                 "interval_list.tsv:md5,9f7718372e87e69aeb837678755a9971",
-                "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -187,6 +177,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-09T15:03:29.439388615"
+        "timestamp": "2025-04-11T19:42:40.668405904"
     }
 }

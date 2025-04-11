@@ -1,7 +1,7 @@
 {
     "-profile test --tools gens --input tests/csv/1.0.0/bam_sorted.csv --gens_bin_length 100 --gens_pon_name gens_pon --gens_readcount_format TSV": {
         "content": [
-            7,
+            5,
             {
                 "GATK4_COLLECTREADCOUNTS": {
                     "gatk4": "4.5.0.0"
@@ -9,14 +9,8 @@
                 "GATK4_CREATEREADCOUNTPANELOFNORMALS": {
                     "gatk4": "4.5.0.0"
                 },
-                "GATK4_CREATESEQUENCEDICTIONARY": {
-                    "gatk4": "4.5.0.0"
-                },
                 "GATK4_PREPROCESSINTERVALS": {
                     "gatk4": "4.5.0.0"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
                 },
                 "Workflow": {
                     "nf-core/createpanelrefs": "v1.0dev"
@@ -31,9 +25,6 @@
                 "gens_pon/readcounts",
                 "gens_pon/readcounts/sample1.tsv",
                 "gens_pon/readcounts/sample2.tsv",
-                "gens_pon/references",
-                "gens_pon/references/genome.dict",
-                "gens_pon/references/genome.fasta.fai",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/multiqc.log",
@@ -48,7 +39,6 @@
             [
                 "sample1.tsv:md5,bfceab35109b04317f38f9cc1cde71ca",
                 "sample2.tsv:md5,7141d08cdc26f6057557be9e23ef4365",
-                "genome.fasta.fai:md5,3520cd30e1b100e55f578db9c855f685",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -56,6 +46,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.5"
         },
-        "timestamp": "2025-04-09T14:48:02.583474325"
+        "timestamp": "2025-04-11T19:53:59.716710047"
     }
 }

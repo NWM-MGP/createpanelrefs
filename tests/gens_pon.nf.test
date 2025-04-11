@@ -10,9 +10,7 @@ nextflow_pipeline {
 
         when {
             params {
-                dict                  = null
-                fai                   = null
-                fasta                 = "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta"
+                genome                = 'GRCh38.chr22.testdata'
                 gens_bin_length       = 100
                 gens_pon_name         = 'gens_pon'
                 gens_readcount_format = "TSV"

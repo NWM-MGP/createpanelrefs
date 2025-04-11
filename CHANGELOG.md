@@ -26,6 +26,8 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 - [#35](https://github.com/nf-core/createpanelrefs/pull/35) - Template update for nf-core/tools v3.0.2
 - [#35](https://github.com/nf-core/createpanelrefs/pull/35) - Improve pipeline level tests
 - [#48](https://github.com/nf-core/createpanelrefs/pull/48) - Improve CI (early failure + automatic nf-test shards + [RunsOn](https://runs-on.com/))
+- [#49](https://github.com/nf-core/createpanelrefs/pull/49) - Improve CI (Test Mutect2 with CRAM + better usage of test references)
+- [#49](https://github.com/nf-core/createpanelrefs/pull/49) - Move all parameters in the schema that are references in the references section
 
 ### `Fixed`
 
