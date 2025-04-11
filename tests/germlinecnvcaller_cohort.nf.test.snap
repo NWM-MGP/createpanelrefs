@@ -1,5 +1,5 @@
 {
-    "Run germlinecnvcaller test": {
+    "-profile test --tools germlinecnvcaller --input tests/csv/1.0.0/bam_sorted.csv --gcnv_model_name cohort --gcnv_ploidy_priors --gcnv_scatter_content 2": {
         "content": [
             12,
             {
@@ -184,9 +184,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "24.10.0"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
         },
-        "timestamp": "2024-11-12T10:28:53.009826572"
+        "timestamp": "2025-04-09T15:03:29.439388615"
     }
 }
