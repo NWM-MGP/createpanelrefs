@@ -8,7 +8,6 @@ nextflow_pipeline {
 
         when {
             params {
-                igenomes_base    = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data'
                 mutect2_pon_name = 'test'
                 outdir           = "$outputDir"
                 tools            = 'mutect2'
@@ -40,7 +39,6 @@ nextflow_pipeline {
 
         when {
             params {
-                igenomes_base    = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data'
                 input            = "${projectDir}/tests/csv/1.0.0/cram.csv"
                 mutect2_pon_name = 'test'
                 outdir           = "$outputDir"
