@@ -16,15 +16,15 @@
 */
 
 params.fasta                       = getGenomeAttribute('fasta')
-params.fai                         = getGenomeAttribute('fai')
 params.dict                        = getGenomeAttribute('dict')
+params.fai                         = getGenomeAttribute('fai')
 params.gcnv_exclude_bed            = getGenomeAttribute('gcnv_exclude_bed')
 params.gcnv_exclude_interval_list  = getGenomeAttribute('gcnv_exclude_interval_list')
 params.gcnv_mappable_regions       = getGenomeAttribute('gcnv_mappable_regions')
+params.gcnv_ploidy_priors          = getGenomeAttribute('gcnv_ploidy_priors')
 params.gcnv_segmental_duplications = getGenomeAttribute('gcnv_segmental_duplications')
 params.gcnv_target_bed             = getGenomeAttribute('gcnv_target_bed')
 params.gcnv_target_interval_list   = getGenomeAttribute('gcnv_target_interval_list')
-params.gcnv_ploidy_priors          = getGenomeAttribute('gcnv_ploidy_priors')
 params.mutect2_target_bed          = getGenomeAttribute('mutect2_target_bed')
 
 /*
