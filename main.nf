@@ -15,9 +15,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-params.fasta                       = getGenomeAttribute('fasta')
 params.dict                        = getGenomeAttribute('dict')
 params.fai                         = getGenomeAttribute('fai')
+params.fasta                       = getGenomeAttribute('fasta')
 params.gcnv_exclude_bed            = getGenomeAttribute('gcnv_exclude_bed')
 params.gcnv_exclude_interval_list  = getGenomeAttribute('gcnv_exclude_interval_list')
 params.gcnv_mappable_regions       = getGenomeAttribute('gcnv_mappable_regions')
