@@ -10,15 +10,12 @@ nextflow_pipeline {
 
         when {
             params {
-                modules_testdata_base_path = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/'
-                dict                       = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.dict"
-                fai                        = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta.fai"
-                fasta                      = "${params.modules_testdata_base_path}/genomics/homo_sapiens/genome/genome.fasta"
-                gcnv_model_name            = 'cohort'
-                gcnv_scatter_content       = 2
-                input                      = "${projectDir}/tests/csv/1.0.0/bam_sorted.csv"
-                outdir                     = "$outputDir"
-                tools                      = 'germlinecnvcaller'
+                genome               = 'GRCh38.chr22.testdata'
+                gcnv_model_name      = 'cohort'
+                gcnv_scatter_content = 2
+                input                = "${projectDir}/tests/csv/1.0.0/bam_sorted.csv"
+                outdir               = "$outputDir"
+                tools                = 'germlinecnvcaller'
             }
         }
 
