@@ -1,5 +1,63 @@
 {
-    "Run MUTECT2 test": {
+    "-profile test --tools mutect2 --input tests/csv/1.0.0/cram.csv": {
+        "content": [
+            5,
+            {
+                "GATK4_CREATESOMATICPANELOFNORMALS": {
+                    "gatk4": "4.5.0.0"
+                },
+                "GATK4_GENOMICSDBIMPORT": {
+                    "gatk4": "4.5.0.0"
+                },
+                "GATK4_MUTECT2": {
+                    "gatk4": "4.5.0.0"
+                },
+                "Workflow": {
+                    "nf-core/createpanelrefs": "v1.0dev"
+                }
+            },
+            [
+                "gatk4",
+                "gatk4/sample3.vcf.gz",
+                "gatk4/sample3.vcf.gz.stats",
+                "gatk4/sample3.vcf.gz.tbi",
+                "gatk4/sample4.vcf.gz",
+                "gatk4/sample4.vcf.gz.stats",
+                "gatk4/sample4.vcf.gz.tbi",
+                "gatk4/test",
+                "gatk4/test.vcf.gz",
+                "gatk4/test.vcf.gz.tbi",
+                "gatk4/test/__tiledb_workspace.tdb",
+                "gatk4/test/callset.json",
+                "gatk4/test/chr21$2$23354000",
+                "gatk4/test/chr21$24132500$24910998",
+                "gatk4/test/chr21$25689498$46709983",
+                "gatk4/test/vcfheader.vcf",
+                "gatk4/test/vidmap.json",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_ceatepanelrefs_software_mqc_versions.yml"
+            ],
+            [
+                "sample3.vcf.gz.stats:md5,a05ace4138fc5cb993ed912d654ec22d",
+                "sample4.vcf.gz.stats:md5,080e6d0e254e582dfb9d5916c9637391",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-04-11T17:42:06.529424623"
+    },
+    "-profile test --tools mutect2": {
         "content": [
             5,
             {
