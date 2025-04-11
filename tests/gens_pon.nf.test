@@ -10,8 +10,8 @@ nextflow_pipeline {
 
         when {
             params {
-                dict                  = null
-                fai                   = null
+                genome                = 'null'
+                igenomes_ignore       = true
                 fasta                 = "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta"
                 gens_bin_length       = 100
                 gens_pon_name         = 'gens_pon'
