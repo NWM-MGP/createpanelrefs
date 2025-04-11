@@ -6,7 +6,7 @@ nextflow_pipeline {
     tag "pipeline_createpanelrefs"
     config "./gens_pon.config"
 
-    test("Run gens test") {
+    test("-profile test --tools gens --input tests/csv/1.0.0/bam_sorted.csv --gens_bin_length 100 --gens_pon_name gens_pon --gens_readcount_format TSV") {
 
         when {
             params {

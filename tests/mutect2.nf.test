@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "main.nf"
     tag "MUTECT2"
 
-    test("-profile test --tools mutect2") {
+    test("-profile test --tools mutect2 --mutect2_pon_name test") {
 
         when {
             params {
@@ -35,7 +35,7 @@ nextflow_pipeline {
         }
     }
 
-    test("-profile test --tools mutect2 --input tests/csv/1.0.0/cram.csv") {
+    test("-profile test --tools mutect2 --mutect2_pon_name test --input tests/csv/1.0.0/cram.csv") {
 
         when {
             params {
