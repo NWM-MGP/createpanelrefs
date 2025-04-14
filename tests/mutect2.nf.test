@@ -11,6 +11,9 @@ nextflow_pipeline {
                 mutect2_pon_name = 'test'
                 outdir           = "$outputDir"
                 tools            = 'mutect2'
+                mutect2_target_bed = null
+                fai                = null
+                dict               = null
             }
         }
 

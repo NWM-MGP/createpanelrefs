@@ -1,9 +1,7 @@
-*/references/genome.dict
 gatk4/*.{vcf.gz,vcf.gz.tbi}
 gatk4/test/*
 gatk4/test/**
 gens_pon/createreadcountpanelofnormals/gens_pon.hdf5
-gens_pon/intervals/genome.interval_list
 germlinecnvcaller/determinegermlinecontigploidy/cohort-model/mu_psi_j_log__.tsv
 germlinecnvcaller/determinegermlinecontigploidy/cohort-model/std_psi_j_log__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-calls/*/baseline_copy_number_t.tsv
@@ -37,3 +35,5 @@ multiqc/multiqc_data/multiqc_sources.txt
 multiqc/multiqc_plots/{svg,pdf,png}/*.{svg,pdf,png}
 multiqc/multiqc_report.html
 pipeline_info/*.{html,json,txt,yml}
+references/genome.dict
+references/intervals/gens_pon/genome.interval_list
