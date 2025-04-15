@@ -43,7 +43,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_crea
 */
 
 workflow {
-    main:
 
     // SUBWORKFLOW: Run initialisation tasks
     PIPELINE_INITIALISATION(
@@ -58,7 +57,7 @@ workflow {
     // WORKFLOW: Run main workflow
     NFCORE_CREATEPANELREFS(
         PIPELINE_INITIALISATION.out.samplesheet,
-        params.tools,
+        params.tools ?: "no_tools",
     )
 
     // SUBWORKFLOW: Run completion tasks

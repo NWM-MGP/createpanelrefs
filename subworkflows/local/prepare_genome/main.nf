@@ -8,9 +8,13 @@ workflow PREPARE_GENOME {
     user_dict               // channel: [optional]  [ val(meta), path(dict) ]
     user_fai                // channel: [optional]  [ val(meta), path(fai) ]
     user_gens_interval_list // channel: [optional]  [ val(meta), path(interval_list) ]
+    tools                   //   array: [mandatory] [ tools ]
 
     main:
     versions = Channel.empty()
+    dict = Channel.empty()
+    fai = Channel.empty()
+    interval_list = Channel.empty()
 
     //  Prepare references
     fasta_for_fai = fasta
@@ -41,9 +45,12 @@ workflow PREPARE_GENOME {
             files[1] ? null : [meta, files[0]]
         }
 
-    GATK4_PREPROCESSINTERVALS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
+    if (tools.contains('gens')) {
 
-    interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS.out.interval_list).collect()
+        GATK4_PREPROCESSINTERVALS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
+
+        interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS.out.interval_list).collect()
+    }
 
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     versions = versions.mix(GATK4_PREPROCESSINTERVALS.out.versions)

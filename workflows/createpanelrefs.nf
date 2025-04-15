@@ -91,14 +91,14 @@ workflow CREATEPANELREFS {
     ch_multiqc_logo = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_interval_list)
+    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_interval_list, tools)
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     ch_dict = PREPARE_GENOME.out.dict
     ch_fai = PREPARE_GENOME.out.fai
     ch_interval_list = PREPARE_GENOME.out.interval_list
 
-    if (tools && tools.split(',').contains('cnvkit')) {
+    if (tools.split(',').contains('cnvkit')) {
 
         ch_samplesheet
             .branch { meta, bam, _bai, cram, crai ->
@@ -124,7 +124,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(CNVKIT_BATCH.out.versions)
     }
 
-    if (tools && tools.split(',').contains('germlinecnvcaller')) {
+    if (tools.split(',').contains('germlinecnvcaller')) {
 
         ch_samplesheet
             .map { meta, bam, bai, cram, crai ->
@@ -155,7 +155,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(GERMLINECNVCALLER_COHORT.out.versions)
     }
 
-    if (tools && tools.split(',').contains('mutect2')) {
+    if (tools.split(',').contains('mutect2')) {
 
         ch_mutect2_input = ch_samplesheet.map { meta, bam, bai, cram, crai ->
             if (bam) {
@@ -178,7 +178,7 @@ workflow CREATEPANELREFS {
         ch_versions = ch_versions.mix(BAM_CREATE_SOM_PON_GATK.out.versions)
     }
 
-    if (tools && tools.split(',').contains('gens')) {
+    if (tools.split(',').contains('gens')) {
 
         ch_samplesheet
             .map { meta, bam, bai, cram, crai ->
