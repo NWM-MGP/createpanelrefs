@@ -1,6 +1,6 @@
-include { SAMTOOLS_FAIDX                 } from '../../../modules/nf-core/samtools/faidx'
-include { GATK4_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/gatk4/createsequencedictionary'
-include { GATK4_PREPROCESSINTERVALS      } from '../../../modules/nf-core/gatk4/preprocessintervals'
+include { SAMTOOLS_FAIDX                                              } from '../../../modules/nf-core/samtools/faidx'
+include { GATK4_CREATESEQUENCEDICTIONARY                              } from '../../../modules/nf-core/gatk4/createsequencedictionary'
+include { GATK4_PREPROCESSINTERVALS as GATK4_PREPROCESSINTERVALS_GENS } from '../../../modules/nf-core/gatk4/preprocessintervals'
 
 //  Prepare references
 workflow PREPARE_GENOME {
@@ -44,7 +44,7 @@ workflow PREPARE_GENOME {
 
 
     // If more than one file, then it means that the user has provided an interval list file
-    // So we can pass out a null channel and GATK4_PREPROCESSINTERVALS won't be run
+    // So we can pass out a null channel and GATK4_PREPROCESSINTERVALS_GENS won't be run
 
     fasta_for_interval_list = fasta
         .mix(user_gens_interval_list)
@@ -53,12 +53,12 @@ workflow PREPARE_GENOME {
             files[1] || !tools.split(',').contains('gens') ? null : [meta, files[0]]
         }
 
-    GATK4_PREPROCESSINTERVALS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
+    GATK4_PREPROCESSINTERVALS_GENS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
 
-    interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS.out.interval_list).collect()
+    interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS_GENS.out.interval_list).collect()
 
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
-    versions = versions.mix(GATK4_PREPROCESSINTERVALS.out.versions)
+    versions = versions.mix(GATK4_PREPROCESSINTERVALS_GENS.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
     emit:
