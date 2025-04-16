@@ -9,7 +9,7 @@
                 "GATK4_CREATEREADCOUNTPANELOFNORMALS": {
                     "gatk4": "4.5.0.0"
                 },
-                "GATK4_PREPROCESSINTERVALS": {
+                "GATK4_PREPROCESSINTERVALS_GENS": {
                     "gatk4": "4.5.0.0"
                 },
                 "Workflow": {
