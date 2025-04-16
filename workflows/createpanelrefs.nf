@@ -76,10 +76,11 @@ workflow CREATEPANELREFS {
     ch_gcnv_segmental_duplications = params.gcnv_segmental_duplications
         ? Channel.fromPath(params.gcnv_segmental_duplications).collect()
         : Channel.value([[id: 'genome'], []])
+
     // Initialize mutect2 specific parameters
-    ch_mutect2_target_bed = params.mutect2_target_bed
-        ? Channel.fromPath(params.mutect2_target_bed).collect()
-        : Channel.value([[id: 'genome'], []])
+    ch_user_mutect2_target_bed = params.mutect2_target_bed
+        ? Channel.fromPath(params.mutect2_target_bed).map { targets -> [[id: 'genome'], targets] }.collect()
+        : Channel.empty()
 
     // Initialize interval list specific parameters (GENS)
     ch_user_gens_interval_list = params.gens_interval_list
@@ -91,12 +92,13 @@ workflow CREATEPANELREFS {
     ch_multiqc_logo = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_gens_interval_list, tools)
+    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_gens_interval_list, ch_user_mutect2_target_bed, tools)
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     ch_dict = PREPARE_GENOME.out.dict
     ch_fai = PREPARE_GENOME.out.fai
-    ch_interval_list = PREPARE_GENOME.out.interval_list
+    ch_interval_list = PREPARE_GENOME.out.gens_interval_list
+    ch_mutect2_target_bed = PREPARE_GENOME.out.mutect2_target_bed
 
     if (tools.split(',').contains('cnvkit')) {
 
@@ -168,11 +170,11 @@ workflow CREATEPANELREFS {
 
         BAM_CREATE_SOM_PON_GATK(
             ch_mutect2_input,
-            params.mutect2_pon_name,
-            ch_dict,
-            ch_fai,
             ch_fasta,
-            ch_mutect2_target_bed,
+            ch_fai,
+            ch_dict,
+            params.mutect2_pon_name,
+            ch_mutect2_target_bed.map { _meta, target -> [target] },
         )
 
         ch_versions = ch_versions.mix(BAM_CREATE_SOM_PON_GATK.out.versions)
