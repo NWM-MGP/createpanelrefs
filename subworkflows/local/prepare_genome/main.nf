@@ -16,7 +16,8 @@ workflow PREPARE_GENOME {
     main:
     dict = Channel.empty()
     fai = Channel.empty()
-    interval_list = Channel.empty()
+    gens_interval_list = Channel.empty()
+    mutect2_target_bed = Channel.empty()
     versions = Channel.empty()
 
     // If more than one file, then it means that the user has provided a dict file
@@ -65,7 +66,7 @@ workflow PREPARE_GENOME {
         .mix(user_mutect2_target_bed)
         .groupTuple()
         .map { meta, files ->
-            files[1] ? null : [meta, files[0]]
+            files[1] || !tools.split(',').contains('mutect2') ? null : [meta, files[0]]
         }
 
     BUILD_INTERVALS(fai_for_intervals, [], false)
