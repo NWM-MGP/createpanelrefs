@@ -2,6 +2,7 @@ include { SAMTOOLS_FAIDX                 } from '../../../modules/nf-core/samtoo
 include { GATK4_CREATESEQUENCEDICTIONARY } from '../../../modules/nf-core/gatk4/createsequencedictionary'
 include { GATK4_PREPROCESSINTERVALS      } from '../../../modules/nf-core/gatk4/preprocessintervals'
 
+//  Prepare references
 workflow PREPARE_GENOME {
     take:
     fasta                   // channel: [mandatory] [ val(meta), path(fasta) ]
@@ -11,12 +12,13 @@ workflow PREPARE_GENOME {
     tools                   //   array: [mandatory] [ tools ]
 
     main:
-    versions = Channel.empty()
     dict = Channel.empty()
     fai = Channel.empty()
     interval_list = Channel.empty()
+    versions = Channel.empty()
 
-    //  Prepare references
+    // If more than one file, then it means that the user has provided a fai file
+    // So we can pass out a null channel and SAMTOOLS_FAIDX won't be run
     fasta_for_fai = fasta
         .mix(user_fai)
         .groupTuple()
@@ -24,6 +26,8 @@ workflow PREPARE_GENOME {
             files[1] ? null : [meta, files[0]]
         }
 
+    // If more than one file, then it means that the user has provided a dict file
+    // So we can pass out a null channel and GATK4_CREATESEQUENCEDICTIONARY won't be run
     fasta_for_dict = fasta
         .mix(user_dict)
         .groupTuple()
@@ -38,19 +42,20 @@ workflow PREPARE_GENOME {
 
     fai = user_fai.mix(SAMTOOLS_FAIDX.out.fai).collect()
 
+
+    // If more than one file, then it means that the user has provided an interval list file
+    // So we can pass out a null channel and GATK4_PREPROCESSINTERVALS won't be run
+
     fasta_for_interval_list = fasta
         .mix(user_gens_interval_list)
         .groupTuple()
         .map { meta, files ->
-            files[1] ? null : [meta, files[0]]
+            files[1] || !tools.split(',').contains('gens') ? null : [meta, files[0]]
         }
 
-    if (tools.contains('gens')) {
+    GATK4_PREPROCESSINTERVALS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
 
-        GATK4_PREPROCESSINTERVALS(fasta_for_interval_list, fai.collect(), dict.collect(), [[:], []], [[:], []])
-
-        interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS.out.interval_list).collect()
-    }
+    interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS.out.interval_list).collect()
 
     versions = versions.mix(GATK4_CREATESEQUENCEDICTIONARY.out.versions)
     versions = versions.mix(GATK4_PREPROCESSINTERVALS.out.versions)

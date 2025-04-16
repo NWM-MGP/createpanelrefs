@@ -82,8 +82,8 @@ workflow CREATEPANELREFS {
         : Channel.value([[id: 'genome'], []])
 
     // Initialize interval list specific parameters (GENS)
-    ch_user_interval_list = params.interval_list
-        ? Channel.fromPath(params.interval_list).map { interval_list -> [[id: 'genome'], interval_list] }.collect()
+    ch_user_gens_interval_list = params.gens_interval_list
+        ? Channel.fromPath(params.gens_interval_list).map { gens_interval_list -> [[id: 'genome'], gens_interval_list] }.collect()
         : Channel.empty()
 
     ch_multiqc_config = Channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
@@ -91,7 +91,7 @@ workflow CREATEPANELREFS {
     ch_multiqc_logo = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
 
-    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_interval_list, tools)
+    PREPARE_GENOME(ch_fasta, ch_user_dict, ch_user_fai, ch_user_gens_interval_list, tools)
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     ch_dict = PREPARE_GENOME.out.dict
