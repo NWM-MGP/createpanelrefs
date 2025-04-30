@@ -31,6 +31,7 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 - [#49](https://github.com/nf-core/createpanelrefs/pull/49) - Move all parameters in the schema that are references in the references section
 - [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Improve references related files handling
 - [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Heavy refactoring of the pipeline
+- [#52](https://github.com/nf-core/createpanelrefs/pull/52) - Template update for nf-core/tools v3.2.1
 
 ### `Fixed`
 
