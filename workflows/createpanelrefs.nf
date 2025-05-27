@@ -4,11 +4,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { BAM_CREATE_SOM_PON_GATK  } from '../../subworkflows/nf-core/bam_create_som_pon_gatk'
-include { CNVKIT_BATCH             } from '../../modules/nf-core/cnvkit/batch'
-include { GENS_PON                 } from '../../subworkflows/local/gens_pon'
-include { GERMLINECNVCALLER_COHORT } from '../../subworkflows/local/germlinecnvcaller_cohort'
-include { SAMTOOLS_VIEW            } from '../../modules/nf-core/samtools/view'
+include { BAM_CREATE_SOM_PON_GATK  } from '../subworkflows/nf-core/bam_create_som_pon_gatk'
+include { CNVKIT_BATCH             } from '../modules/nf-core/cnvkit/batch'
+include { GENS_PON                 } from '../subworkflows/local/gens_pon'
+include { GERMLINECNVCALLER_COHORT } from '../subworkflows/local/germlinecnvcaller_cohort'
+include { SAMTOOLS_VIEW            } from '../modules/nf-core/samtools/view'
 
 workflow CREATEPANELREFS {
     take:
