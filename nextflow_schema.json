@@ -98,7 +98,11 @@
             "default": "",
             "properties": {
                 "cnvkit_targets": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to directory for target file.",
+                    "help_text": "Specify the path to the target file for CNVkit."
                 }
             }
         },
@@ -109,7 +113,8 @@
             "default": "",
             "properties": {
                 "mutect2_pon_name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name for panel of normals."
                 }
             }
         },

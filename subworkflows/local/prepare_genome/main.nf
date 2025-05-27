@@ -20,18 +20,19 @@ workflow PREPARE_GENOME {
     mutect2_target_bed = Channel.empty()
     versions = Channel.empty()
 
-    // If more than one file, then it means that the user has provided a dict file
-    // So we can pass out a null channel and GATK4_CREATESEQUENCEDICTIONARY won't be run
+    // If a user_dict is provided, no fasta will be used to generate a dict
+    // Otherwise, GATK4_CREATESEQUENCEDICTIONARY will be run to generate a dict
     fasta_for_dict = fasta
         .mix(user_dict)
+        .groupTuple()
         .filter { _meta, files -> !files[1] }
 
     GATK4_CREATESEQUENCEDICTIONARY(fasta_for_dict)
 
     dict = user_dict.mix(GATK4_CREATESEQUENCEDICTIONARY.out.dict).collect()
 
-    // If more than one file, then it means that the user has provided a fai file
-    // So we can pass out a null channel and SAMTOOLS_FAIDX won't be run
+    // If a user_fai is provided, no fasta will be used to generate a fai
+    // Otherwise, SAMTOOLS_FAIDX will be run to generate a fai
     fasta_for_fai = fasta
         .mix(user_fai)
         .groupTuple()
@@ -41,9 +42,8 @@ workflow PREPARE_GENOME {
 
     fai = user_fai.mix(SAMTOOLS_FAIDX.out.fai).collect()
 
-    // If more than one file, then it means that the user has provided an interval list file
-    // So we can pass out a null channel and GATK4_PREPROCESSINTERVALS_GENS won't be run
-
+    // If a user_gens_interval_list is provided or if gens is not a specified tools, no fasta will be used to generate an interval list
+    // Otherwise, GATK4_PREPROCESSINTERVALS_GENS will be run to generate an interval list
     fasta_for_interval_list = fasta
         .mix(user_gens_interval_list)
         .groupTuple()
@@ -53,8 +53,8 @@ workflow PREPARE_GENOME {
 
     gens_interval_list = user_gens_interval_list.mix(GATK4_PREPROCESSINTERVALS_GENS.out.interval_list).collect()
 
-    // If more than one file, then it means that the user has provided a fai file
-    // So we can pass out a null channel and SAMTOOLS_FAIDX won't be run
+    // If a user_mutect2_target_bed is provided or if mutect2 is not a specified tools, no fai will be used to generate a target bed
+    // Otherwise, BUILD_INTERVALS will be run to generate a target bed
     fai_for_intervals = fai
         .mix(user_mutect2_target_bed)
         .groupTuple()
