@@ -15,6 +15,7 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 - [#8](https://github.com/nf-core/createpanelrefs/pull/8) - `Mutect2` can be used to create a PON
 - [#10](https://github.com/nf-core/createpanelrefs/pull/10) - `GATK germlinecnvcaller` can be used to create a PON
 - [#17](https://github.com/nf-core/createpanelrefs/pull/17) - `GENS` can be used to create a PON
+- [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Add auto creation of interval_list file from gens, and bed file for mutect2
 
 ### `Updated`
 
@@ -28,9 +29,13 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 - [#48](https://github.com/nf-core/createpanelrefs/pull/48) - Improve CI (early failure + automatic nf-test shards + [RunsOn](https://runs-on.com/))
 - [#49](https://github.com/nf-core/createpanelrefs/pull/49) - Improve CI (Test Mutect2 with CRAM + better usage of test references)
 - [#49](https://github.com/nf-core/createpanelrefs/pull/49) - Move all parameters in the schema that are references in the references section
+- [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Improve references related files handling
+- [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Heavy refactoring of the pipeline
 - [#52](https://github.com/nf-core/createpanelrefs/pull/52) - Template update for nf-core/tools v3.2.1
 
 ### `Fixed`
+
+- [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Fix mutect2 that wasn't working without a bed file
 
 ### `Dependencies`
 

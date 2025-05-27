@@ -35,14 +35,15 @@ nextflow_pipeline {
         }
     }
 
-    test("-profile test --tools mutect2 --mutect2_pon_name test --input tests/csv/1.0.0/cram.csv") {
+    test("-profile test --tools mutect2 --mutect2_target_bed null --mutect2_pon_name test --input tests/csv/1.0.0/cram.csv") {
 
         when {
             params {
-                input            = "${projectDir}/tests/csv/1.0.0/cram.csv"
-                mutect2_pon_name = 'test'
-                outdir           = "$outputDir"
-                tools            = 'mutect2'
+                input              = "${projectDir}/tests/csv/1.0.0/cram.csv"
+                mutect2_pon_name   = 'test'
+                mutect2_target_bed = null
+                outdir             = "$outputDir"
+                tools              = 'mutect2'
             }
         }
 

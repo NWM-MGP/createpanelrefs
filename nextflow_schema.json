@@ -216,6 +216,15 @@
                     "exists": true,
                     "mimetype": "text/plain"
                 },
+                "gens_interval_list": {
+                    "type": "string",
+                    "description": "Path to GENS interval list file",
+                    "pattern": "^\\S+\\.interval_list$",
+                    "format": "file-path",
+                    "fa_icon": "fas fa-file",
+                    "exists": true,
+                    "mimetype": "text/plain"
+                },
                 "gcnv_exclude_bed": {
                     "type": "string",
                     "exists": true,
