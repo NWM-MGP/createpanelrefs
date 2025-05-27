@@ -36,6 +36,7 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 ### `Fixed`
 
 - [#50](https://github.com/nf-core/createpanelrefs/pull/50) - Fix mutect2 that wasn't working without a bed file
+- [#53](https://github.com/nf-core/createpanelrefs/pull/53) - Minor syntax fixes due to [#50](https://github.com/nf-core/createpanelrefs/pull/50)
 
 ### `Dependencies`
 
