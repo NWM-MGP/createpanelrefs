@@ -116,6 +116,7 @@ workflow {
     )
 
     fasta.view()
+    user_mutect2_target_bed.view()
     PREPARE_GENOME(fasta, user_dict, user_fai, user_gens_interval_list, user_mutect2_target_bed, params.tools ?: "no_tools")
 
     dict = PREPARE_GENOME.out.dict
