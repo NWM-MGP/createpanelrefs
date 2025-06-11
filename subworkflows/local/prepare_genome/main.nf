@@ -58,11 +58,16 @@ workflow PREPARE_GENOME {
 
     // If more than one file, then it means that the user has provided a fai file
     // So we can pass out a null channel and SAMTOOLS_FAIDX won't be run
+
+    println "fai var"
+    fai.view()
     
     fai_for_intervals = fai
         .mix(user_mutect2_target_bed)
         .groupTuple()
         .filter { _meta, files -> (tools.split(',').contains('mutect2') && !files[1]) }
+
+    fai_for_intervals.view()
 
     BUILD_INTERVALS(fai_for_intervals, [], false)
 
