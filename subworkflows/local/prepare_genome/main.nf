@@ -20,9 +20,6 @@ workflow PREPARE_GENOME {
     mutect2_target_bed = Channel.empty()
     versions = Channel.empty()
 
-    println "user_mutect2_target_bed at beginning of PREPARE_GENOME"
-    user_mutect2_target_bed.view()
-
     // If more than one file, then it means that the user has provided a dict file
     // So we can pass out a null channel and GATK4_CREATESEQUENCEDICTIONARY won't be run
     fasta_for_dict = fasta
@@ -59,15 +56,16 @@ workflow PREPARE_GENOME {
     // If more than one file, then it means that the user has provided a fai file
     // So we can pass out a null channel and SAMTOOLS_FAIDX won't be run
 
-    println "fai var"
-    fai.view()
+    fai.view { "FAI channel: ${it}" }
+    user_mutect2_target_bed.view { "user_mutect2_target_bed channel: ${it}" }
     
     fai_for_intervals = fai
         .mix(user_mutect2_target_bed)
         .groupTuple()
+        .view { meta, files -> "DEBUG: meta=${meta}, files=${files}" }
         .filter { _meta, files -> (tools.split(',').contains('mutect2') && !files[1]) }
 
-    fai_for_intervals.view()
+    fai_for_intervals.view { "fai_for_intervals channe: ${it}" }
 
     BUILD_INTERVALS(fai_for_intervals, [], false)
 
@@ -78,8 +76,7 @@ workflow PREPARE_GENOME {
     versions = versions.mix(GATK4_PREPROCESSINTERVALS_GENS.out.versions)
     versions = versions.mix(SAMTOOLS_FAIDX.out.versions)
 
-    println "mutect2_target_bed at end of PREPARE_GENOME"
-    mutect2_target_bed.view()
+    mutect2_target_bed.view { "mutect2_target_bed channel: ${it}" }
 
     emit:
     dict               // channel: [ val(meta), path(dict) ]
