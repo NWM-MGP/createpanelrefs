@@ -23,6 +23,13 @@ workflow BAM_CREATE_SOM_PON_GATK {
     //
     // Perform variant calling for each sample using mutect2 module in panel of normals mode.
     //
+    ch_mutect2_in.view { "ch_mutect2_in: ${ch_mutect2_in}" }
+    ch_input.view { "ch_input: ${ch_input}" }
+    ch_fasta.view { "ch_fasta: ${ch_fasta}" }
+    ch_fai.view { "ch_fai: ${ch_fai}" }
+    ch_dict.view { "ch_dict: ${ch_dict}" }
+
+
     GATK4_MUTECT2(
         ch_input,
         ch_fasta,
@@ -55,6 +62,7 @@ workflow BAM_CREATE_SOM_PON_GATK {
         .combine(ch_gendb_intervals)
         .view { "ch_gendb_input after intervals combine: ${it}" }
         .combine(ch_dict_gendb)
+        .view { "ch_gendb_input after combine with ch_dict_gendb ${it}" }
         .map { meta, vcf, tbi, interval, dict -> [meta, vcf, tbi, interval, [], dict] }
         .view { "ch_gendb_input after map: ${it}" }
 
