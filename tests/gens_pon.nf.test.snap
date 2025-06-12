@@ -11,9 +11,6 @@
                 },
                 "GATK4_PREPROCESSINTERVALS_GENS": {
                     "gatk4": "4.6.1.0"
-                },
-                "Workflow": {
-                    "nf-core/createpanelrefs": "v1.0dev"
                 }
             },
             [
@@ -33,7 +30,7 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_ceatepanelrefs_software_mqc_versions.yml",
+                "pipeline_info/nf_core_createpanelrefs_software_mqc_versions.yml",
                 "references",
                 "references/intervals",
                 "references/intervals/gens_pon",
@@ -42,14 +39,14 @@
             [
                 "sample1.tsv:md5,bfceab35109b04317f38f9cc1cde71ca",
                 "sample2.tsv:md5,7141d08cdc26f6057557be9e23ef4365",
-                "BETA-multiqc.parquet:md5,b0e6858f997bcf27b7d7cdff6b3ae49d",
+                "BETA-multiqc.parquet:md5,2951d99beb76fdf5c8f3c058a2508669",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-06-05T09:06:19.856807946"
+        "timestamp": "2025-06-12T12:08:33.46752653"
     }
 }

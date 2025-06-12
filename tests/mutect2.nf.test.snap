@@ -7,16 +7,13 @@
                     "gawk": "5.3.0"
                 },
                 "GATK4_CREATESOMATICPANELOFNORMALS": {
-                    "gatk4": "4.5.0.0"
+                    "gatk4": "4.6.1.0"
                 },
                 "GATK4_GENOMICSDBIMPORT": {
-                    "gatk4": "4.5.0.0"
+                    "gatk4": "4.6.1.0"
                 },
                 "GATK4_MUTECT2": {
-                    "gatk4": "4.5.0.0"
-                },
-                "Workflow": {
-                    "nf-core/createpanelrefs": "v1.0dev"
+                    "gatk4": "4.6.1.0"
                 }
             },
             [
@@ -40,6 +37,7 @@
                 "intervals/mutect2_target_bed/genome.bed",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/BETA-multiqc.parquet",
                 "multiqc/multiqc_data/multiqc.log",
                 "multiqc/multiqc_data/multiqc_citations.txt",
                 "multiqc/multiqc_data/multiqc_data.json",
@@ -47,36 +45,34 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_ceatepanelrefs_software_mqc_versions.yml"
+                "pipeline_info/nf_core_createpanelrefs_software_mqc_versions.yml"
             ],
             [
                 "sample3.vcf.gz.stats:md5,a05ace4138fc5cb993ed912d654ec22d",
                 "sample4.vcf.gz.stats:md5,080e6d0e254e582dfb9d5916c9637391",
                 "genome.bed:md5,472d213cfcde96565699779d5bfc0e32",
+                "BETA-multiqc.parquet:md5,7483f85c57b7d9e17ec1b2ed42f684b9",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-04-16T11:05:19.08294075"
+        "timestamp": "2025-06-12T12:26:09.554931606"
     },
     "-profile test --tools mutect2 --mutect2_pon_name test": {
         "content": [
             5,
             {
                 "GATK4_CREATESOMATICPANELOFNORMALS": {
-                    "gatk4": "4.5.0.0"
+                    "gatk4": "4.6.1.0"
                 },
                 "GATK4_GENOMICSDBIMPORT": {
-                    "gatk4": "4.5.0.0"
+                    "gatk4": "4.6.1.0"
                 },
                 "GATK4_MUTECT2": {
-                    "gatk4": "4.5.0.0"
-                },
-                "Workflow": {
-                    "nf-core/createpanelrefs": "v1.0dev"
+                    "gatk4": "4.6.1.0"
                 }
             },
             [
@@ -99,6 +95,7 @@
                 "gatk4/test/vidmap.json",
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/BETA-multiqc.parquet",
                 "multiqc/multiqc_data/multiqc.log",
                 "multiqc/multiqc_data/multiqc_citations.txt",
                 "multiqc/multiqc_data/multiqc_data.json",
@@ -106,18 +103,19 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_ceatepanelrefs_software_mqc_versions.yml"
+                "pipeline_info/nf_core_createpanelrefs_software_mqc_versions.yml"
             ],
             [
                 "sample1.vcf.gz.stats:md5,b569ce66bbffe9588b3d221e821023ee",
                 "sample2.vcf.gz.stats:md5,76f749c53212d72e98801f6030fbf8a6",
+                "BETA-multiqc.parquet:md5,d5f02cd6ec31ddcd621d85446f5885db",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.3"
         },
-        "timestamp": "2025-04-09T15:07:42.422460888"
+        "timestamp": "2025-06-12T12:22:15.173878756"
     }
 }
