@@ -20,10 +20,12 @@ germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-call
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/log_q_tau_tk.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/mu_W_tu.tsv
+germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/mu_ard_u_interval__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/mu_ard_u_log__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/mu_log_mean_bias_t.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/mu_psi_t_log__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/std_W_tu.tsv
+germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/std_ard_u_interval__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/std_ard_u_log__.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/std_log_mean_bias_t.tsv
 germlinecnvcaller/germlinecnvcaller/{1,2}scattered-cnv-model/{1,2}scattered-model/std_psi_t_log__.tsv
