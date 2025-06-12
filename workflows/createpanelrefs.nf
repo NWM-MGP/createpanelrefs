@@ -98,6 +98,7 @@ workflow CREATEPANELREFS {
             }
         }
 
+        mutect2_target_bed.view { "mutect2_target_bed in createpanelrefs: ${it}"}
         BAM_CREATE_SOM_PON_GATK(
             mutect2_input,
             fasta,

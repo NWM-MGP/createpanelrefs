@@ -16,6 +16,7 @@ workflow BAM_CREATE_SOM_PON_GATK {
     ch_gendb_intervals  // channel: [ path(interval_file) ]
 
     main:
+    ch_gendb_intervals.view { "ch_gendb_intervals: ${it}" }
     ch_versions = Channel.empty()
     ch_input    = ch_mutect2_in
 
