@@ -98,7 +98,11 @@ workflow CREATEPANELREFS {
             }
         }
 
-        mutect2_target_bed.view { "mutect2_target_bed in createpanelrefs: ${it}"}
+        mutect2_target_bed
+            .view { "mutect2_target_bed in createpanelrefs: ${it}" }
+            .map { _meta, target -> [target] }
+            .view { "simulating creation of ch_gendb_intervals input var: ${it}" }
+
         BAM_CREATE_SOM_PON_GATK(
             mutect2_input,
             fasta,
