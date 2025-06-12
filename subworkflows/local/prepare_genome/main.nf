@@ -65,7 +65,7 @@ workflow PREPARE_GENOME {
         .view { meta, files -> "DEBUG: meta=${meta}, files=${files}" }
         .filter { _meta, files -> (tools.split(',').contains('mutect2') && !files[1]) }
 
-    fai_for_intervals.view { "fai_for_intervals channe: ${it}" }
+    fai_for_intervals.view { "fai_for_intervals channel: ${it}" }
 
     BUILD_INTERVALS(fai_for_intervals, [], false)
 

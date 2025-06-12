@@ -123,6 +123,7 @@ workflow {
     fai = PREPARE_GENOME.out.fai
     gens_interval_list = PREPARE_GENOME.out.gens_interval_list
     mutect2_target_bed = PREPARE_GENOME.out.mutect2_target_bed
+    mutect2_target_bed.view {"mutect2_target_bed in main.nf after PREPARE_GENOME: ${it}" }
 
 
     multiqc_config = Channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
@@ -250,6 +251,7 @@ workflow NFCORE_CREATEPANELREFS {
 
     main:
     // WORKFLOW: Run pipeline
+    mutect2_target_bed.view { "mutect2_target_bed in NFCORE_CREATEPANELREFS: ${it}" }
     CREATEPANELREFS(samplesheet, tools, gcnv_model_name, gens_pon_name, mutect2_pon_name, fasta, dict, fai, cnvkit_targets, gcnv_exclude_bed, gcnv_exclude_interval_list, gcnv_mappable_regions, gcnv_ploidy_priors, gcnv_segmental_duplications, gcnv_target_bed, gcnv_target_interval_list, gens_interval_list, mutect2_target_bed)
 
     emit:
