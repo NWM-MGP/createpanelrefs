@@ -13,6 +13,7 @@
             [
                 "multiqc",
                 "multiqc/multiqc_data",
+                "multiqc/multiqc_data/BETA-multiqc.parquet",
                 "multiqc/multiqc_data/multiqc.log",
                 "multiqc/multiqc_data/multiqc_citations.txt",
                 "multiqc/multiqc_data/multiqc_data.json",
@@ -37,6 +38,7 @@
                 "samtools/sample4.bam"
             ],
             [
+                "BETA-multiqc.parquet:md5,700aa7f7497a3ebc9fe444a93ee0bd65",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "panel.cnn:md5,1443acdb3bb430b0c144ec100ef8a514",
                 "sample3.antitargetcoverage.cnn:md5,203caf8cef6935bb50b4138097955cb8",
@@ -53,8 +55,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-04-09T14:47:24.266861802"
+        "timestamp": "2025-06-05T08:59:59.283280871"
     }
 }
