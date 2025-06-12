@@ -98,6 +98,8 @@ workflow CREATEPANELREFS {
             }
         }
 
+        mutect2_input.view { "input bam files: ${it}" }
+
         mutect2_target_bed
             .view { "mutect2_target_bed in createpanelrefs: ${it}" }
             .map { _meta, target -> [target] }
