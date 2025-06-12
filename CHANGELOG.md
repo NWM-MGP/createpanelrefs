@@ -43,4 +43,12 @@ Initial release of nf-core/createpanelrefs, created with the [nf-core](https://n
 
 ### `Dependencies`
 
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `cnvkit`   |             | 0.9.10      |
+| `gatk4`    |             | 4.6.1.0     |
+| `gawk`     |             | 5.3.0       |
+| `multiqc`  |             | 1.29        |
+| `samtools` |             | 1.21        |
+
 ### `Deprecated`
