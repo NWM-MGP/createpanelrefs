@@ -172,7 +172,6 @@
                 "interval_list.tsv:md5,9f7718372e87e69aeb837678755a9971",
                 "mu_ard_u_interval__.tsv:md5,f29ca1587a34a758a291eb9905057d54",
                 "std_ard_u_interval__.tsv:md5,6989c174d280ca75ee537a0947e469e9",
-                "BETA-multiqc.parquet:md5,ce459aa978b3b8518a3abc2339bd7f69",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],

@@ -39,7 +39,6 @@
             [
                 "sample1.tsv:md5,bfceab35109b04317f38f9cc1cde71ca",
                 "sample2.tsv:md5,7141d08cdc26f6057557be9e23ef4365",
-                "BETA-multiqc.parquet:md5,2951d99beb76fdf5c8f3c058a2508669",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],

@@ -35,7 +35,6 @@
                 "samtools/sample4.bam"
             ],
             [
-                "BETA-multiqc.parquet:md5,43859f31ac62a102622f7c50461e15eb",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "panel.cnn:md5,1443acdb3bb430b0c144ec100ef8a514",
                 "sample3.antitargetcoverage.cnn:md5,203caf8cef6935bb50b4138097955cb8",

@@ -51,7 +51,6 @@
                 "sample3.vcf.gz.stats:md5,a05ace4138fc5cb993ed912d654ec22d",
                 "sample4.vcf.gz.stats:md5,080e6d0e254e582dfb9d5916c9637391",
                 "genome.bed:md5,472d213cfcde96565699779d5bfc0e32",
-                "BETA-multiqc.parquet:md5,7483f85c57b7d9e17ec1b2ed42f684b9",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
@@ -108,7 +107,6 @@
             [
                 "sample1.vcf.gz.stats:md5,b569ce66bbffe9588b3d221e821023ee",
                 "sample2.vcf.gz.stats:md5,76f749c53212d72e98801f6030fbf8a6",
-                "BETA-multiqc.parquet:md5,d5f02cd6ec31ddcd621d85446f5885db",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
