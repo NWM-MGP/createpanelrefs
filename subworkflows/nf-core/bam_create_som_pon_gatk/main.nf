@@ -24,7 +24,7 @@ workflow BAM_CREATE_SOM_PON_GATK {
     // Perform variant calling for each sample using mutect2 module in panel of normals mode.
     //
     println(ch_mutect2_in)
-    ch_mutect2_in.view { "ch_mutect2_in: ${it[0]}" }
+    ch_mutect2_in.view { "ch_mutect2_in: ${it}" }
     ch_input.view { "ch_input: ${it}" }
     ch_fasta.view { "ch_fasta: ${it}" }
     ch_fai.view { "ch_fai: ${it}" }
