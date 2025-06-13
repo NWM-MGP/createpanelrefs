@@ -26,6 +26,15 @@ workflow PREPARE_GENOME {
         .mix(user_dict)
         .filter { _meta, files -> !files[1] }
 
+    fasta_for_dict
+        .ifPresent {
+            println("fasta_for_dict had items")
+            fasta_for_dict.view()
+        }
+        .ifEmpty {
+            println("fasta_for_dict had no items")
+        }
+
     GATK4_CREATESEQUENCEDICTIONARY(fasta_for_dict)
 
     dict = user_dict.mix(GATK4_CREATESEQUENCEDICTIONARY.out.dict).collect()
@@ -36,6 +45,15 @@ workflow PREPARE_GENOME {
         .mix(user_fai)
         .groupTuple()
         .filter { _meta, files -> !files[1] }
+
+    fasta_for_fai
+        .ifPresent {
+            println("fasta_for_fai had items")
+            fasta_for_fai.view()
+        }
+        .ifEmpty {
+            println("fasta_for_fai had no items")
+        }
 
     SAMTOOLS_FAIDX(fasta_for_fai, [[:], []])
 
@@ -58,7 +76,7 @@ workflow PREPARE_GENOME {
 
     fai.view { "FAI channel: ${it}" }
     user_mutect2_target_bed.view { "user_mutect2_target_bed channel: ${it}" }
-    
+
     fai_for_intervals = fai
         .mix(user_mutect2_target_bed)
         .groupTuple()
