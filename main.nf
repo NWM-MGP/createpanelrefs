@@ -121,22 +121,16 @@ workflow {
     fai = PREPARE_GENOME.out.fai
 
     dict
-        .ifPresent {
-            println("dict had items")
-            dict.view()
-        }
         .ifEmpty {
             println("dict had no items")
         }
+        .subscribe { item -> log.info("processing item ${item}") }
 
     fai
-        .ifPresent {
-            println("fai had items")
-            fai.view()
-        }
         .ifEmpty {
             println("fai had no items")
         }
+        .subscribe { item -> log.info("processing item ${item}") }
 
     gens_interval_list = PREPARE_GENOME.out.gens_interval_list
     mutect2_target_bed = PREPARE_GENOME.out.mutect2_target_bed

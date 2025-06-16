@@ -27,13 +27,10 @@ workflow PREPARE_GENOME {
         .filter { _meta, files -> !files[1] }
 
     fasta_for_dict
-        .ifPresent {
-            println("fasta_for_dict had items")
-            fasta_for_dict.view()
-        }
         .ifEmpty {
             println("fasta_for_dict had no items")
         }
+        .subscribe { item -> log.info("processing item ${item}") }
 
     GATK4_CREATESEQUENCEDICTIONARY(fasta_for_dict)
 
@@ -47,13 +44,10 @@ workflow PREPARE_GENOME {
         .filter { _meta, files -> !files[1] }
 
     fasta_for_fai
-        .ifPresent {
-            println("fasta_for_fai had items")
-            fasta_for_fai.view()
-        }
         .ifEmpty {
             println("fasta_for_fai had no items")
         }
+        .subscribe { item -> log.info("processing item ${item}") }
 
     SAMTOOLS_FAIDX(fasta_for_fai, [[:], []])
 
