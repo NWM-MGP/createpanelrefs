@@ -24,6 +24,7 @@ workflow PREPARE_GENOME {
     // So we can pass out a null channel and GATK4_CREATESEQUENCEDICTIONARY won't be run
     fasta_for_dict = fasta
         .mix(user_dict)
+        .groupTuple()
         .filter { _meta, files -> !files[1] }
 
     fasta_for_dict
