@@ -23,8 +23,7 @@ process GATK4_GENOMICSDBIMPORT {
     task.ext.when == null || task.ext.when
 
     script:
-    interval_file.view { "interval file channel value in gatk4_genomicsdbimport: ${it}" }
-    meta.view { "meta channel value in gatk4_genomicsdbimport: ${it}" }
+
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
 
